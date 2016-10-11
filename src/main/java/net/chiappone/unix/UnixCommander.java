@@ -19,9 +19,11 @@ public class UnixCommander {
     private static final Runtime runtime = Runtime.getRuntime();
 
     /**
-     * @param process
-     * @param reader
-     * @param stream
+     * Destroys the process, closes the reader and stream.
+     *
+     * @param process the process to destroy
+     * @param reader  the reader to close
+     * @param stream  the stream to close
      */
     private void closeResources( Process process, BufferedReader reader, InputStream stream ) {
 
@@ -55,8 +57,10 @@ public class UnixCommander {
     }
 
     /**
-     * @param commands
-     * @return
+     * Execute the list of commands.
+     *
+     * @param commands list of commands to execute
+     * @return CommandResult
      */
     public CommandResult execute( List<String> commands ) {
 
@@ -65,9 +69,11 @@ public class UnixCommander {
     }
 
     /**
-     * @param commands
-     * @param logOutput
-     * @return
+     * Execute the list of commands and choose whether or not to log the output.
+     *
+     * @param commands  list of commands to execute
+     * @param logOutput true to log the output
+     * @return CommandResult
      */
     public CommandResult execute( List<String> commands, boolean logOutput ) {
 
@@ -76,10 +82,13 @@ public class UnixCommander {
     }
 
     /**
-     * @param commands
-     * @param logOutput
-     * @param waitForProcess
-     * @return
+     * Execute the list of commands, choose whether or not to log the output, and choose whether or not we should
+     * wait for the process to complete.
+     *
+     * @param commands       list of commands to execute
+     * @param logOutput      true to log the output
+     * @param waitForProcess true to wait for the process to complete
+     * @return CommandResult
      */
     public CommandResult execute( List<String> commands, boolean logOutput, boolean waitForProcess ) {
 
@@ -102,8 +111,10 @@ public class UnixCommander {
     }
 
     /**
-     * @param command
-     * @return
+     * Execute the given command.
+     *
+     * @param command the command to execute
+     * @return CommandResult
      */
     public CommandResult execute( String command ) {
 
@@ -112,9 +123,11 @@ public class UnixCommander {
     }
 
     /**
-     * @param command
-     * @param logOutput
-     * @return
+     * Execute the given command choose whether or not to log the output.
+     *
+     * @param command   the command to execute
+     * @param logOutput true to log the output
+     * @return CommandResult
      */
     public CommandResult execute( String command, boolean logOutput ) {
 
@@ -137,10 +150,12 @@ public class UnixCommander {
     }
 
     /**
-     * @param user
-     * @param host
-     * @param commands
-     * @return
+     * Execute the list of commands on a remote host.
+     *
+     * @param user     the username to use for SSH
+     * @param host     the remote host
+     * @param commands the list of commands to execute
+     * @return CommandResult
      */
     public CommandResult execute( String user, String host, List<String> commands ) {
 
@@ -149,11 +164,13 @@ public class UnixCommander {
     }
 
     /**
-     * @param user
-     * @param host
-     * @param commands
-     * @param logOutput
-     * @return
+     * Execute the list of commands on a remote host. Choose whether or not to log the output.
+     *
+     * @param user      the username to use for SSH
+     * @param host      the remote host
+     * @param commands  the list of commands to execute
+     * @param logOutput true to log the output
+     * @return CommandResult
      */
     public CommandResult execute( String user, String host, List<String> commands, boolean logOutput ) {
 
@@ -162,12 +179,15 @@ public class UnixCommander {
     }
 
     /**
-     * @param user
-     * @param host
-     * @param commands
-     * @param logOutput
-     * @param waitForProcess
-     * @return
+     * Execute the list of commands on a remote host. Choose whether or not to log the output, and whether or not
+     * we should wait for the procss to complete.
+     *
+     * @param user           the SSH user
+     * @param host           the remote host
+     * @param commands       the list of commands to execute
+     * @param logOutput      true to log the output
+     * @param waitForProcess true to wait for the process to complete
+     * @return CommandResult
      */
     public CommandResult execute( String user, String host, List<String> commands, boolean logOutput,
                     boolean waitForProcess ) {
@@ -184,10 +204,12 @@ public class UnixCommander {
     }
 
     /**
-     * @param user
-     * @param host
-     * @param command
-     * @return
+     * Execute the given command on a remote host.
+     *
+     * @param user    the SSH user
+     * @param host    the remote host
+     * @param command the command to execute
+     * @return CommandResult
      */
     public CommandResult execute( String user, String host, String command ) {
 
@@ -196,11 +218,13 @@ public class UnixCommander {
     }
 
     /**
-     * @param user
-     * @param host
-     * @param command
-     * @param logOutput
-     * @return
+     * Execute the given command on a remote host. Choose whether or not to log the output.
+     *
+     * @param user      the SSH user
+     * @param host      the remote host
+     * @param command   the command to execute
+     * @param logOutput true to log the output
+     * @return CommandResult
      */
     public CommandResult execute( String user, String host, String command, boolean logOutput ) {
 
@@ -210,11 +234,14 @@ public class UnixCommander {
     }
 
     /**
-     * @param process
-     * @param commands
-     * @param logOutput
-     * @param waitForProcess
-     * @return
+     * Execute the given command on a remote host. Choose whether or not to log the output, and whether or not we
+     * should wait for the process to complete.
+     *
+     * @param process        the process running as a result of the commands
+     * @param commands       the list of commands to execute
+     * @param logOutput      true to log the output
+     * @param waitForProcess true to wait for the process to complete
+     * @return CommandResult
      */
     private CommandResult executeProcess( Process process, List<String> commands, boolean logOutput,
                     boolean waitForProcess ) {
@@ -263,7 +290,7 @@ public class UnixCommander {
 
             } catch ( IOException e ) {
 
-                // Eat it, stream is probably closed
+                logger.debug( "Error handling stream", e );
 
             } catch ( Exception e ) {
 
@@ -277,7 +304,6 @@ public class UnixCommander {
 
         }
 
-        // XXX begin edits
         // Otherwise, just read the first line and return
 
         else {
@@ -300,7 +326,7 @@ public class UnixCommander {
 
             } catch ( IOException e ) {
 
-                // Eat it, stream is probably closed
+                logger.debug( "Error handling stream", e );
 
             } catch ( Exception e ) {
 
@@ -312,7 +338,7 @@ public class UnixCommander {
 
             }
 
-        } // XXX end edits
+        }
 
         StringBuilder buffer = new StringBuilder();
 
@@ -321,16 +347,17 @@ public class UnixCommander {
         }
 
         logCommand( logOutput, buffer.toString(), result, exitValue );
-
         return new CommandResult( exitValue, result );
 
     }
 
     /**
-     * @param logOutput
-     * @param command
-     * @param result
-     * @param exitValue
+     * Logs the output of the given command.
+     *
+     * @param logOutput true to log the output
+     * @param command   the command to log
+     * @param result    the result of the command
+     * @param exitValue the exit value of the command
      */
     private void logCommand( boolean logOutput, String command, String result, int exitValue ) {
 
@@ -385,11 +412,13 @@ public class UnixCommander {
     }
 
     /**
-     * @param user
-     * @param host
-     * @param from
-     * @param to
-     * @return
+     * Executes SCP on a remote host.
+     *
+     * @param user the SSH user
+     * @param host the remote host
+     * @param from source file
+     * @param to   destination file
+     * @return CommandResult
      */
     public CommandResult scp( String user, String host, String from, String to ) {
 

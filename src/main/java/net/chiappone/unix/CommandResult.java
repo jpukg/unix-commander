@@ -1,8 +1,7 @@
 package net.chiappone.unix;
 
 /**
- * Represents the result of a Unix command (e.g. output text and exit code
- * value).
+ * Represents the result of a Unix command (e.g. output text and exit code value).
  *
  * @author Kurtis Chiappone
  */
@@ -15,21 +14,12 @@ public class CommandResult {
 
     }
 
-    /**
-     * @param exitValue
-     * @param output
-     */
     public CommandResult( int exitValue, String output ) {
 
         this.exitValue = exitValue;
         this.output = output;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override public boolean equals( Object obj ) {
 
         if ( this == obj )
@@ -49,43 +39,26 @@ public class CommandResult {
         return true;
     }
 
-    /**
-     * @return the exitValue
-     */
     public int getExitValue() {
 
         return exitValue;
     }
 
-    /**
-     * @param exitValue the exitValue to set
-     */
     public void setExitValue( int exitValue ) {
 
         this.exitValue = exitValue;
     }
 
-    /**
-     * @return the output
-     */
     public String getOutput() {
 
         return output;
     }
 
-    /**
-     * @param output the output to set
-     */
     public void setOutput( String output ) {
 
         this.output = output;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#hashCode()
-     */
     @Override public int hashCode() {
 
         final int prime = 31;
@@ -95,11 +68,6 @@ public class CommandResult {
         return result;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override public String toString() {
 
         return output;
